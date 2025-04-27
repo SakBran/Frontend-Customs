@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react';
 import './style.css';
 import { PaginationType } from '../../_models/PaginationType';
 import NameConvert from '../../_services/NameConvert';
-// import TableAction from '../TabeActions/TableAction';
-import PaginationComponent from './Pagination';
 
 //ဒီနေရမှာ Ant Designက Table သုံးလဲရတယ် Depedencyနဲနိုင်သမျှနဲအောင် လုပ်သာအကောင်းဆုံးပဲ
 //Fetch လုပ်တာလဲ ပြချင်တဲ့ Column ကို Display Dataထဲထည့်ပေးရုံပဲ
