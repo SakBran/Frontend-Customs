@@ -9,6 +9,7 @@ import 'primeicons/primeicons.css';
 import '../styles/layout/layout.scss';
 import '../styles/demo/Demos.scss';
 import LoginPage from './(full-page)/auth/login/page';
+import axiosInstance from './_services/AxiosInstance';
 
 interface RootLayoutProps {
     children: React.ReactNode;
@@ -20,14 +21,28 @@ export default function RootLayout({ children }: RootLayoutProps) {
     const [authChecked, setAuthChecked] = useState(false);
 
     useEffect(() => {
-        const token = localStorage.getItem('AuthToken');
+        const token = sessionStorage.getItem('token');
         // const isAuthPage = pathname.startsWith('/auth');
 
+        if (token) {
+            const authChecked = async () => {
+                const resp = await axiosInstance.get('auth');
+                if (resp.status === 200) {
+                    const data = await resp.data;
+                    setAuthChecked(true);
+                    console.log(data);
+                } else {
+                    console.error('Authentication failed with status:', resp.status);
+                    setAuthChecked(false);
+                    router.push('/auth/login');
+                }
+            };
+            authChecked();
+        }
         // Redirect based on token
         if (!token) {
+            router.push('/auth/login');
             setAuthChecked(false);
-        } else {
-            setAuthChecked(true);
         }
 
         // ✅ Let component render after decision

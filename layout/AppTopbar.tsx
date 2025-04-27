@@ -42,6 +42,17 @@ const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
                     <i className="pi pi-user"></i>
                     <span>Profile</span>
                 </button>
+                <button
+                    type="button"
+                    onClick={() => {
+                        sessionStorage.clear();
+                        window.location.reload();
+                    }}
+                    className="p-link layout-topbar-button"
+                >
+                    <i className="pi pi-sign-out"></i>
+                    <span>Sign Out</span>
+                </button>
                 <Link href="/documentation">
                     <button type="button" className="p-link layout-topbar-button">
                         <i className="pi pi-cog"></i>
