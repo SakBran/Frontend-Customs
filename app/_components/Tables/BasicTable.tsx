@@ -84,30 +84,29 @@ export const BasicTable: React.FC<PropsType> = ({
 
     return (
         <>
-            {loading && <LoadingPage></LoadingPage>}
-            {!loading && (
-                <>
-                    <div className="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td>No</td>
-                                    {displayData.map((display: string, i) => {
-                                        if (display !== 'id') {
-                                            return (
-                                                <td key={i} onClick={() => handleSort(display)}>
-                                                    {NameConvert(display)}
-                                                    {sortColumn === display && <span>{sortDirection === 'asc' ? '▲' : '▼'}</span>}
-                                                </td>
-                                            );
-                                        } else {
-                                            return '';
-                                        }
-                                    })}
-                                    {displayData.includes('id') && <td>Action</td>}
-                                </tr>
-                            </thead>
+            <>
+                <div className="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>No</td>
+                                {displayData.map((display: string, i) => {
+                                    if (display !== 'id') {
+                                        return (
+                                            <td key={i} onClick={() => handleSort(display)}>
+                                                {NameConvert(display)}
+                                                {sortColumn === display && <span>{sortDirection === 'asc' ? '▲' : '▼'}</span>}
+                                            </td>
+                                        );
+                                    } else {
+                                        return '';
+                                    }
+                                })}
+                                {displayData.includes('id') && <td>Action</td>}
+                            </tr>
+                        </thead>
 
+                        {!loading && (
                             <tbody>
                                 {data.data?.map((row, index) => {
                                     const data = displayData.map((display: string, i) => {
@@ -130,75 +129,108 @@ export const BasicTable: React.FC<PropsType> = ({
                                     );
                                 })}
                             </tbody>
-                        </table>
-                    </div>
-
-                    <div className="pagination">
-                        <div
-                            className="compact-pagination"
-                            style={{
-                                display: 'flex',
-                                gap: '10px',
-                                alignItems: 'center',
-                                justifyContent: 'center', // Center horizontally
-                                padding: '10px 0',
-                                fontSize: '14px'
-                            }}
-                        >
-                            <button
-                                style={{
-                                    padding: '5px 10px',
-                                    border: 'none',
-                                    borderRadius: '4px',
-                                    backgroundColor: pageIndex === 0 ? '#e0e0e0' : '#007bff',
-                                    color: '#fff',
-                                    cursor: pageIndex === 0 ? 'not-allowed' : 'pointer',
-                                    opacity: pageIndex === 0 ? 0.6 : 1
-                                }}
-                                disabled={pageIndex === 0}
-                                onClick={() => setPageIndex(pageIndex - 1)}
-                            >
-                                &lt;
-                            </button>
-                            <span>
-                                {pageIndex + 1} / {data.totalPages}
-                            </span>
-                            <button
-                                style={{
-                                    padding: '5px 10px',
-                                    border: 'none',
-                                    borderRadius: '4px',
-                                    backgroundColor: !data.hasNextPage ? '#e0e0e0' : '#007bff',
-                                    color: '#fff',
-                                    cursor: !data.hasNextPage ? 'not-allowed' : 'pointer',
-                                    opacity: !data.hasNextPage ? 0.6 : 1
-                                }}
-                                disabled={!data.hasNextPage}
-                                onClick={() => setPageIndex(pageIndex + 1)}
-                            >
-                                &gt;
-                            </button>
-                            <select
-                                style={{
-                                    padding: '5px',
-                                    border: '1px solid #ccc',
-                                    borderRadius: '4px',
-                                    backgroundColor: '#fff',
-                                    cursor: 'pointer'
-                                }}
-                                value={pageSize}
-                                onChange={(e) => setPageSize(Number(e.target.value))}
-                            >
-                                {[5, 10, 20, 50, 100].map((size) => (
-                                    <option key={size} value={size}>
-                                        {size}
-                                    </option>
+                        )}
+                        {loading && (
+                            <tbody>
+                                {Array.from({ length: pageSize }).map((_, rowIndex) => (
+                                    <tr key={rowIndex}>
+                                        <td>
+                                            <div className="skeleton skeleton-text">
+                                                <img src={`/layout/images/table-skeleton.svg`} alt="..." height="12" className="mr-2" />
+                                            </div>
+                                        </td>
+                                        {displayData.map((display, colIndex) => {
+                                            if (display !== 'id') {
+                                                return (
+                                                    <td key={colIndex}>
+                                                        <div className="skeleton skeleton-text">
+                                                            <img src={`/layout/images/table-skeleton.svg`} alt="..." height="12" className="mr-2" />
+                                                        </div>
+                                                    </td>
+                                                );
+                                            } else {
+                                                return null;
+                                            }
+                                        })}
+                                        {displayData.includes('id') && (
+                                            <td>
+                                                <div className="skeleton skeleton-button">
+                                                    <img src={`/layout/images/table-skeleton.svg`} alt="..." height="12" className="mr-2" />
+                                                </div>
+                                            </td>
+                                        )}
+                                    </tr>
                                 ))}
-                            </select>
-                        </div>
+                            </tbody>
+                        )}
+                    </table>
+                </div>
+
+                <div className="pagination">
+                    <div
+                        className="compact-pagination"
+                        style={{
+                            display: 'flex',
+                            gap: '10px',
+                            alignItems: 'center',
+                            justifyContent: 'center', // Center horizontally
+                            padding: '10px 0',
+                            fontSize: '14px'
+                        }}
+                    >
+                        <button
+                            style={{
+                                padding: '5px 10px',
+                                border: 'none',
+                                borderRadius: '4px',
+                                backgroundColor: pageIndex === 0 ? '#e0e0e0' : '#007bff',
+                                color: '#fff',
+                                cursor: pageIndex === 0 ? 'not-allowed' : 'pointer',
+                                opacity: pageIndex === 0 ? 0.6 : 1
+                            }}
+                            disabled={pageIndex === 0}
+                            onClick={() => setPageIndex(pageIndex - 1)}
+                        >
+                            &lt;
+                        </button>
+                        <span>
+                            {pageIndex + 1} / {data.totalPages}
+                        </span>
+                        <button
+                            style={{
+                                padding: '5px 10px',
+                                border: 'none',
+                                borderRadius: '4px',
+                                backgroundColor: !data.hasNextPage ? '#e0e0e0' : '#007bff',
+                                color: '#fff',
+                                cursor: !data.hasNextPage ? 'not-allowed' : 'pointer',
+                                opacity: !data.hasNextPage ? 0.6 : 1
+                            }}
+                            disabled={!data.hasNextPage}
+                            onClick={() => setPageIndex(pageIndex + 1)}
+                        >
+                            &gt;
+                        </button>
+                        <select
+                            style={{
+                                padding: '5px',
+                                border: '1px solid #ccc',
+                                borderRadius: '4px',
+                                backgroundColor: '#fff',
+                                cursor: 'pointer'
+                            }}
+                            value={pageSize}
+                            onChange={(e) => setPageSize(Number(e.target.value))}
+                        >
+                            {[5, 10, 20, 50, 100].map((size) => (
+                                <option key={size} value={size}>
+                                    {size}
+                                </option>
+                            ))}
+                        </select>
                     </div>
-                </>
-            )}
+                </div>
+            </>
         </>
     );
 };
