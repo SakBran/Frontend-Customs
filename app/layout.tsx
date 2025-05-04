@@ -22,7 +22,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
     useEffect(() => {
         const token = sessionStorage.getItem('token');
-        // const isAuthPage = pathname.startsWith('/auth');
 
         if (token) {
             const authChecked = async () => {
@@ -30,7 +29,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 if (resp.status === 200) {
                     const data = await resp.data;
                     setAuthChecked(true);
-                    console.log(data);
+                    console.log('Authentication successful:', data);
                 } else {
                     console.error('Authentication failed with status:', resp.status);
                     setAuthChecked(false);
@@ -38,15 +37,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 }
             };
             authChecked();
-        }
-        // Redirect based on token
-        if (!token) {
+        } else {
             router.push('/auth/login');
             setAuthChecked(false);
         }
-
-        // ✅ Let component render after decision
-    }, [pathname, router]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []); // Removed dependencies to ensure it runs only once
 
     return (
         <html lang="en" suppressHydrationWarning>
