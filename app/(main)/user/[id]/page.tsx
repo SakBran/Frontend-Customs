@@ -18,7 +18,6 @@ const Edit = ({ params }: Props) => {
         setloading(true);
         const fetchUser = async () => {
             const response = await GetSingle(`User/${unwrappedParams.id}`);
-            console.log(response);
 
             if (!response) {
                 Swal.fire({
