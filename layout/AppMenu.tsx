@@ -15,7 +15,7 @@ const AppMenu = () => {
             label: 'Users',
             items: [
                 { label: 'Users', icon: 'pi pi-fw pi-users', to: '/user/list' },
-                { label: 'Add new user', icon: 'pi pi-user-plus', to: '/user/addNewUser' }
+                { label: 'Add new user', icon: 'pi pi-user-plus', to: '/user/new' }
             ]
         },
         {

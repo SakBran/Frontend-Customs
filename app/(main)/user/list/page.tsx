@@ -12,8 +12,8 @@ type Props = {
 const UserTableAction = ({ id }: Props) => {
     return (
         <td>
-            <Link href={'edit/' + id} style={{ cursor: 'pointer' }}>
-                Action
+            <Link href={'/user/' + id} style={{ cursor: 'pointer' }}>
+                Edit
             </Link>
         </td>
     );
@@ -25,7 +25,7 @@ const page = () => {
             ...data,
             data: data.data.map((item) => ({
                 ...item,
-                isActive: item.isActive == 'True' ? 'Active' : item.isActive == 'False' ? 'InActive' : 'N/A'
+                isActive: item.isActive == '0' ? 'Active' : item.isActive == '1' ? 'InActive' : 'N/A'
             }))
         };
     };
