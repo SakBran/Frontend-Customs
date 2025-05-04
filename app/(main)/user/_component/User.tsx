@@ -88,8 +88,8 @@ const UserForm: React.FC<{ onLoadData?: FormData }> = ({ onLoadData }) => {
                     <Controller
                         name="isActive"
                         control={control}
-                        rules={{ required: 'Role is required.' }}
-                        render={({ field }) => <Dropdown id={field.name} {...field} options={isActives} placeholder="Select a role" className={classNames({ 'p-invalid': errors.isActive })} />}
+                        rules={{ required: 'This field is required.' }}
+                        render={({ field }) => <Dropdown id={field.name} {...field} options={isActives} placeholder="Active/Inactive" className={classNames({ 'p-invalid': errors.isActive })} />}
                     />
                     {getFormErrorMessage('isActive')}
                 </div>
