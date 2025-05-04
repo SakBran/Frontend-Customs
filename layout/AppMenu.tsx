@@ -36,9 +36,9 @@ const AppMenu = () => {
         {
             label: 'Report',
             items: [
-                { label: 'Sent List', icon: 'pi pi-fw pi-users', to: '/user' },
-                { label: 'Failed List', icon: 'pi pi-fw pi-users', to: '/user' },
-                { label: 'Not Sent List', icon: 'pi pi-fw pi-users', to: '/user' }
+                { label: 'Report 1', icon: 'pi pi-chart-bar', to: '/1' },
+                { label: 'Report 2', icon: 'pi pi-chart-bar', to: '/2' },
+                { label: 'Report 3', icon: 'pi pi-chart-bar-', to: '/3' }
             ]
         }
     ];
