@@ -189,6 +189,21 @@ export const BasicTable: React.FC<PropsType> = ({
                                 opacity: pageIndex === 0 ? 0.6 : 1
                             }}
                             disabled={pageIndex === 0}
+                            onClick={() => setPageIndex(0)}
+                        >
+                            &laquo; First
+                        </button>
+                        <button
+                            style={{
+                                padding: '5px 10px',
+                                border: 'none',
+                                borderRadius: '4px',
+                                backgroundColor: pageIndex === 0 ? '#e0e0e0' : '#007bff',
+                                color: '#fff',
+                                cursor: pageIndex === 0 ? 'not-allowed' : 'pointer',
+                                opacity: pageIndex === 0 ? 0.6 : 1
+                            }}
+                            disabled={pageIndex === 0}
                             onClick={() => setPageIndex(pageIndex - 1)}
                         >
                             &lt;
@@ -210,6 +225,21 @@ export const BasicTable: React.FC<PropsType> = ({
                             onClick={() => setPageIndex(pageIndex + 1)}
                         >
                             &gt;
+                        </button>
+                        <button
+                            style={{
+                                padding: '5px 10px',
+                                border: 'none',
+                                borderRadius: '4px',
+                                backgroundColor: pageIndex === data.totalPages - 1 ? '#e0e0e0' : '#007bff',
+                                color: '#fff',
+                                cursor: pageIndex === data.totalPages - 1 ? 'not-allowed' : 'pointer',
+                                opacity: pageIndex === data.totalPages - 1 ? 0.6 : 1
+                            }}
+                            disabled={pageIndex === data.totalPages - 1}
+                            onClick={() => setPageIndex(data.totalPages - 1)}
+                        >
+                            Last &raquo;
                         </button>
                         <select
                             style={{
