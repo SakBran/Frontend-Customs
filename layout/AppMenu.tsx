@@ -13,7 +13,10 @@ const AppMenu = () => {
     const model: AppMenuItem[] = [
         {
             label: 'Users',
-            items: [{ label: 'Users', icon: 'pi pi-fw pi-users', to: '/user' }]
+            items: [
+                { label: 'Users', icon: 'pi pi-fw pi-users', to: '/user/list' },
+                { label: 'Add new user', icon: 'pi pi-user-plus', to: '/user/addNewUser' }
+            ]
         },
         {
             label: 'IRD-CEIR ID List',
@@ -38,7 +41,7 @@ const AppMenu = () => {
             items: [
                 { label: 'Report 1', icon: 'pi pi-chart-bar', to: '/1' },
                 { label: 'Report 2', icon: 'pi pi-chart-bar', to: '/2' },
-                { label: 'Report 3', icon: 'pi pi-chart-bar-', to: '/3' }
+                { label: 'Report 3', icon: 'pi pi-chart-bar', to: '/3' }
             ]
         }
     ];

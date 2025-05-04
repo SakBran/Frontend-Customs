@@ -13,10 +13,10 @@ import { Demo } from '@/types';
 import { ChartData, ChartOptions } from 'chart.js';
 
 const lineData: ChartData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturaday', 'Sunday'],
     datasets: [
         {
-            label: 'First Dataset',
+            label: 'Sent Dataset',
             data: [65, 59, 80, 81, 56, 55, 40],
             fill: false,
             backgroundColor: '#2f4860',
@@ -24,11 +24,27 @@ const lineData: ChartData = {
             tension: 0.4
         },
         {
-            label: 'Second Dataset',
+            label: 'Failed Dataset',
             data: [28, 48, 40, 19, 86, 27, 90],
             fill: false,
             backgroundColor: '#00bb7e',
             borderColor: '#00bb7e',
+            tension: 0.4
+        },
+        {
+            label: 'Not Sent Dataset',
+            data: [2, 2, 3, 0, 2, 1, 2],
+            fill: false,
+            backgroundColor: '#326fa8',
+            borderColor: '#326fa8',
+            tension: 0.4
+        },
+        {
+            label: 'Duplicate Dataset',
+            data: [10, 20, 30, 40, 50, 60, 70],
+            fill: false,
+            backgroundColor: '#a83232',
+            borderColor: '#a83232',
             tension: 0.4
         }
     ]
@@ -130,11 +146,11 @@ const Dashboard = () => {
                 <div className="card mb-0">
                     <div className="flex justify-content-between mb-3">
                         <div>
-                            <span className="block text-500 font-medium mb-3">Orders</span>
+                            <span className="block text-500 font-medium mb-3">Sent</span>
                             <div className="text-900 font-medium text-xl">152</div>
                         </div>
                         <div className="flex align-items-center justify-content-center bg-blue-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                            <i className="pi pi-shopping-cart text-blue-500 text-xl" />
+                            <i className="pi pi-file-export text-blue-500 text-xl" />
                         </div>
                     </div>
                     <span className="text-green-500 font-medium">24 new </span>
@@ -145,11 +161,11 @@ const Dashboard = () => {
                 <div className="card mb-0">
                     <div className="flex justify-content-between mb-3">
                         <div>
-                            <span className="block text-500 font-medium mb-3">Revenue</span>
+                            <span className="block text-500 font-medium mb-3">Failed</span>
                             <div className="text-900 font-medium text-xl">$2.100</div>
                         </div>
                         <div className="flex align-items-center justify-content-center bg-orange-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                            <i className="pi pi-map-marker text-orange-500 text-xl" />
+                            <i className="pi pi-ban text-orange-500 text-xl" />
                         </div>
                     </div>
                     <span className="text-green-500 font-medium">%52+ </span>
@@ -160,11 +176,11 @@ const Dashboard = () => {
                 <div className="card mb-0">
                     <div className="flex justify-content-between mb-3">
                         <div>
-                            <span className="block text-500 font-medium mb-3">Customers</span>
+                            <span className="block text-500 font-medium mb-3">Not Sent</span>
                             <div className="text-900 font-medium text-xl">28441</div>
                         </div>
                         <div className="flex align-items-center justify-content-center bg-cyan-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                            <i className="pi pi-inbox text-cyan-500 text-xl" />
+                            <i className="pi pi-wrench text-cyan-500 text-xl" />
                         </div>
                     </div>
                     <span className="text-green-500 font-medium">520 </span>
@@ -175,11 +191,11 @@ const Dashboard = () => {
                 <div className="card mb-0">
                     <div className="flex justify-content-between mb-3">
                         <div>
-                            <span className="block text-500 font-medium mb-3">Comments</span>
+                            <span className="block text-500 font-medium mb-3">Duplicate</span>
                             <div className="text-900 font-medium text-xl">152 Unread</div>
                         </div>
                         <div className="flex align-items-center justify-content-center bg-purple-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                            <i className="pi pi-comment text-purple-500 text-xl" />
+                            <i className="pi pi-clone text-purple-500 text-xl" />
                         </div>
                     </div>
                     <span className="text-green-500 font-medium">85 </span>
@@ -189,7 +205,7 @@ const Dashboard = () => {
 
             <div className="col-12 xl:col-6">
                 <div className="card">
-                    <h5>Recent Sales</h5>
+                    <h5>Today Sent list</h5>
                     <DataTable value={products} rows={5} paginator responsiveLayout="scroll">
                         <Column header="Image" body={(data) => <img className="shadow-2" src={`/demo/images/product/${data.image}`} alt={data.image} width="50" />} />
                         <Column field="name" header="Name" sortable style={{ width: '35%' }} />
@@ -299,13 +315,13 @@ const Dashboard = () => {
 
             <div className="col-12 xl:col-6">
                 <div className="card">
-                    <h5>Sales Overview</h5>
+                    <h5>CEIR ID Performance Overview</h5>
                     <Chart type="line" data={lineData} options={lineOptions} />
                 </div>
 
                 <div className="card">
                     <div className="flex align-items-center justify-content-between mb-4">
-                        <h5>Notifications</h5>
+                        <h5>Recent Users Activity</h5>
                         <div>
                             <Button type="button" icon="pi pi-ellipsis-v" rounded text className="p-button-plain" onClick={(event) => menu2.current?.toggle(event)} />
                             <Menu
@@ -333,7 +349,7 @@ const Dashboard = () => {
                                 </span>
                             </span>
                         </li>
-                        <li className="flex align-items-center py-2">
+                        <li className="flex align-items-center py-2 border-bottom-1 surface-border">
                             <div className="w-3rem h-3rem flex align-items-center justify-content-center bg-orange-100 border-circle mr-3 flex-shrink-0">
                                 <i className="pi pi-download text-xl text-orange-500" />
                             </div>
@@ -341,29 +357,28 @@ const Dashboard = () => {
                                 Your request for withdrawal of <span className="text-blue-500 font-medium">2500$</span> has been initiated.
                             </span>
                         </li>
-                    </ul>
-
-                    <span className="block text-600 font-medium mb-3">YESTERDAY</span>
-                    <ul className="p-0 m-0 list-none">
                         <li className="flex align-items-center py-2 border-bottom-1 surface-border">
-                            <div className="w-3rem h-3rem flex align-items-center justify-content-center bg-blue-100 border-circle mr-3 flex-shrink-0">
-                                <i className="pi pi-dollar text-xl text-blue-500" />
+                            <div className="w-3rem h-3rem flex align-items-center justify-content-center bg-orange-100 border-circle mr-3 flex-shrink-0">
+                                <i className="pi pi-download text-xl text-orange-500" />
                             </div>
-                            <span className="text-900 line-height-3">
-                                Keyser Wick
-                                <span className="text-700">
-                                    {' '}
-                                    has purchased a black jacket for <span className="text-blue-500">59$</span>
-                                </span>
+                            <span className="text-700 line-height-3">
+                                Your request for withdrawal of <span className="text-blue-500 font-medium">2500$</span> has been initiated.
                             </span>
                         </li>
                         <li className="flex align-items-center py-2 border-bottom-1 surface-border">
-                            <div className="w-3rem h-3rem flex align-items-center justify-content-center bg-pink-100 border-circle mr-3 flex-shrink-0">
-                                <i className="pi pi-question text-xl text-pink-500" />
+                            <div className="w-3rem h-3rem flex align-items-center justify-content-center bg-orange-100 border-circle mr-3 flex-shrink-0">
+                                <i className="pi pi-download text-xl text-orange-500" />
                             </div>
-                            <span className="text-900 line-height-3">
-                                Jane Davis
-                                <span className="text-700"> has posted a new questions about your product.</span>
+                            <span className="text-700 line-height-3">
+                                Your request for withdrawal of <span className="text-blue-500 font-medium">2500$</span> has been initiated.
+                            </span>
+                        </li>
+                        <li className="flex align-items-center py-2 border-bottom-1 surface-border">
+                            <div className="w-3rem h-3rem flex align-items-center justify-content-center bg-orange-100 border-circle mr-3 flex-shrink-0">
+                                <i className="pi pi-download text-xl text-orange-500" />
+                            </div>
+                            <span className="text-700 line-height-3">
+                                Your request for withdrawal of <span className="text-blue-500 font-medium">2500$</span> has been initiated.
                             </span>
                         </li>
                     </ul>
