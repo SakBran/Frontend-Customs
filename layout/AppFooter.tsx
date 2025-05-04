@@ -10,7 +10,7 @@ const AppFooter = () => {
         <div className="layout-footer">
             <img src={`/layout/images/logo.svg`} alt="Logo" height="20" className="mr-2" />
             by
-            <span className="font-medium ml-2">Shwe Digits</span>
+            <span className="font-medium ml-2">SHWE DIGIT</span>
         </div>
     );
 };

@@ -26,7 +26,30 @@ const LoginPage = () => {
             };
             const resp = await axiosInstance.post('auth', data);
             const temp = await resp.data;
-            sessionStorage.setItem('token', temp.token);
+            if (temp) {
+                if (temp) {
+                    if (temp.token) {
+                        sessionStorage.setItem('token', temp.token);
+                    } else {
+                        console.error('Authentication response is missing token:', temp);
+                    }
+
+                    if (temp.userId) {
+                        sessionStorage.setItem('userId', temp.userId);
+                    } else {
+                        console.error('Authentication response is missing userId:', temp);
+                    }
+
+                    if (temp.permission) {
+                        sessionStorage.setItem('permission', temp.permission);
+                    } else {
+                        console.error('Authentication response is missing permission:', temp);
+                    }
+                } else {
+                    console.error('Authentication response is null or undefined:', temp);
+                }
+            }
+
             window.location.reload();
             router.push('/');
             console.log(temp);

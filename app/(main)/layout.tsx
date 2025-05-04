@@ -7,14 +7,14 @@ interface AppLayoutProps {
 
 export const metadata: Metadata = {
     title: 'အကောက်ခွန်ဦးစီးဌာန၊ MACCS ဌာနခွဲ',
-    description: 'The ultimate collection of design-agnostic, flexible and accessible React UI Components.',
+    description: 'Admin management console for MACCSS CEIR ID.',
     robots: { index: false, follow: false },
     viewport: { initialScale: 1, width: 'device-width' },
     openGraph: {
         type: 'website',
-        title: 'PrimeReact SAKAI-REACT',
-        url: 'https://sakai.primereact.org/',
-        description: 'The ultimate collection of design-agnostic, flexible and accessible React UI Components.',
+        title: 'အကောက်ခွန်ဦးစီးဌာန၊ MACCS ဌာနခွဲ',
+        url: 'https://customs.gov.mm/',
+        description: 'Admin management console for MACCSS CEIR ID.',
         images: ['https://www.primefaces.org/static/social/sakai-react.png'],
         ttl: 604800
     },
