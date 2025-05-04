@@ -100,7 +100,7 @@ export const BasicTable: React.FC<PropsType> = ({
                                     return '';
                                 }
                             })}
-                            <td>Action</td>
+                            {displayData.includes('id') && <td>Action</td>}
                         </tr>
                     </thead>
 
@@ -120,6 +120,7 @@ export const BasicTable: React.FC<PropsType> = ({
                                     <td>{index + 1 + pageIndex * pageSize}</td>
                                     {data}
                                     {/* <TableAction id={row['id']} /> */}
+
                                     {actionComponent ? actionComponent({ id: row['id'] }) : null}
                                 </tr>
                             );
