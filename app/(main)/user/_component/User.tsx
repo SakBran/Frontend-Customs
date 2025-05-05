@@ -119,7 +119,7 @@ const UserForm: React.FC<{ onLoadData?: FormData }> = ({ onLoadData }) => {
                 </div>
 
                 <div className="field">
-                    <label htmlFor="role">Active/In-active</label>
+                    <label htmlFor="isActive">Active/In-active</label>
                     <Controller
                         name="isActive"
                         control={control}

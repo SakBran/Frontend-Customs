@@ -1,23 +1,88 @@
 'use client';
 import { BasicTable } from '@/app/_components/Tables/BasicTable';
 import { PaginationType } from '@/app/_models/PaginationType';
-import { Get } from '@/app/_services/BasicHttpServices';
+import { Get, Post, Put } from '@/app/_services/BasicHttpServices';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
+import Swal from 'sweetalert2';
 
 type Props = {
     id: string;
 };
 
 const ResendAction = ({ id }: Props) => {
+    const router = useRouter();
+    const EditModal = (id: string) => {
+        Swal.fire({
+            title: 'Please enter correrct CEIR ID to resend',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Save',
+            showLoaderOnConfirm: true,
+            preConfirm: async (ceirId) => {
+                try {
+                    const apiUrl = `ceirid`;
+                    const response = await Put(apiUrl, id, ceirId);
+                    return response;
+                } catch (error) {
+                    Swal.showValidationMessage(`Request failed: ${error}`);
+                }
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Data is successfully updated',
+                    icon: 'success'
+                });
+                router.refresh();
+            }
+        });
+    };
+    const SendModal = (id: string) => {
+        Swal.fire({
+            title: 'Do you want to send the changes?',
+            showCancelButton: true,
+            confirmButtonText: 'Send'
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                const sendAction = async () => {
+                    const response = await Post('resend', { id: id });
+                    Swal.fire('Deleted!', 'Data is successfully transfered', 'success');
+                    router.refresh();
+                };
+                sendAction();
+            }
+        });
+    };
     return (
         <td>
-            <Link href={'edit/' + id} style={{ cursor: 'pointer' }}>
+            <Link
+                onClick={(e) => {
+                    e.preventDefault();
+                    EditModal(id);
+                }}
+                href={''}
+                style={{ cursor: 'pointer' }}
+            >
                 Edit
             </Link>
             |
-            <Link href={'edit/' + id} style={{ cursor: 'pointer' }}>
-                Sent
+            <Link
+                onClick={(e) => {
+                    e.preventDefault();
+                    SendModal(id);
+                }}
+                href={''}
+                style={{ cursor: 'pointer' }}
+            >
+                Send
             </Link>
         </td>
     );

@@ -17,9 +17,9 @@ const UserTableAction = ({ id }: Props) => {
     const DeleteUser = async (id: string) => {
         // const response = await Delete('User', id);
         Swal.fire({
-            title: 'Do you want to save the changes?',
+            title: 'Are you sure?',
             showCancelButton: true,
-            confirmButtonText: 'Delete'
+            confirmButtonText: 'Yes'
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
