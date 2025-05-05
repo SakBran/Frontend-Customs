@@ -5,6 +5,8 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import { classNames } from 'primereact/utils';
+import { Post, Put } from '@/app/_services/BasicHttpServices';
+import Swal from 'sweetalert2';
 
 export interface FormData {
     name: string;
@@ -45,6 +47,39 @@ const UserForm: React.FC<{ onLoadData?: FormData }> = ({ onLoadData }) => {
 
     const onSubmit = (data: FormData) => {
         console.log(data);
+        const processedData = async () => {
+            let response;
+            if (data && data.id) {
+                response = await Put(`User`, data.id, data);
+            } else {
+                response = await Post('User', data);
+            }
+
+            if (!response) {
+                const errorData = await response;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: errorData.toString()
+                });
+                return;
+            }
+
+            if (data && data.id) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'User updated successfully'
+                });
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'User created successfully'
+                });
+            }
+        };
+        processedData();
     };
 
     const getFormErrorMessage = (name: keyof FormData) => {
