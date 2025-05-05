@@ -50,10 +50,6 @@ export const BasicTable: React.FC<PropsType> = ({
     const [data, setData] = useState<PaginationType>(intialValue);
 
     const [url, setUrl] = useState('');
-    const handleSort = (column: string) => {
-        setSortColumn(column);
-        setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
-    };
 
     //ဒီထဲကParameterက Dotnet Core ထဲကPagination Getနဲ့ညှိပေးထားတာ
     //တကယ်လို့ပြင်ချင်ရင် Parameter တွေပြင်သုံးပေါ့
@@ -67,7 +63,9 @@ export const BasicTable: React.FC<PropsType> = ({
             temp = temp + `&filterColumn=${filterColumn}&filterQuery=${filterQuery}`;
         }
         setUrl(temp);
-    }, [sortColumn, sortDirection, pageSize, pageIndex, filterColumn, filterQuery, api, fetch, url]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [sortColumn, sortDirection, pageSize, pageIndex, filterColumn, filterQuery, url]);
+    // }, [sortColumn, sortDirection, pageSize, pageIndex, filterColumn, filterQuery, api, fetch, url]);
 
     useEffect(() => {
         setloading(true);
@@ -81,6 +79,10 @@ export const BasicTable: React.FC<PropsType> = ({
         };
         call();
     }, [fetch, url]);
+    const handleSort = (column: string) => {
+        setSortColumn(column);
+        setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    };
 
     return (
         <>
