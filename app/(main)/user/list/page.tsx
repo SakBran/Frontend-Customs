@@ -51,16 +51,17 @@ const UserTableAction = ({ id }: Props) => {
     );
 };
 
-const page = () => {
-    const transformUserData = (data: PaginationType): PaginationType => {
-        return {
-            ...data,
-            data: data.data.map((item) => ({
-                ...item,
-                isActive: item.isActive == '0' ? 'Active' : item.isActive == '1' ? 'InActive' : 'N/A'
-            }))
-        };
+const transformUserData = (data: PaginationType): PaginationType => {
+    return {
+        ...data,
+        data: data.data.map((item) => ({
+            ...item,
+            isActive: item.isActive == '0' ? 'Active' : item.isActive == '1' ? 'InActive' : 'N/A'
+        }))
     };
+};
+
+const page = () => {
     return (
         <div className="col-12 xl:col-12">
             <div className="card">

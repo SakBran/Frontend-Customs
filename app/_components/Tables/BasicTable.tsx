@@ -108,7 +108,7 @@ export const BasicTable: React.FC<PropsType> = ({
                             </tr>
                         </thead>
 
-                        {!loading && (
+                        {!loading && data && (
                             <tbody>
                                 {data.data?.map((row, index) => {
                                     const data = displayData.map((display: string, i) => {

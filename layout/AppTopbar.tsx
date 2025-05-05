@@ -49,12 +49,12 @@ const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
                     <i className="pi pi-sign-out"></i>
                     <span>Sign Out</span>
                 </button>
-                <Link href="/documentation">
+                {/* <Link href="/documentation">
                     <button type="button" className="p-link layout-topbar-button">
                         <i className="pi pi-cog"></i>
                         <span>Settings</span>
                     </button>
-                </Link>
+                </Link> */}
             </div>
         </div>
     );
