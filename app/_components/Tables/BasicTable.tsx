@@ -64,21 +64,33 @@ export const BasicTable: React.FC<PropsType> = ({
         }
         setUrl(temp);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sortColumn, sortDirection, pageSize, pageIndex, filterColumn, filterQuery, url]);
+    }, [sortColumn, sortDirection, pageSize, pageIndex, filterColumn, filterQuery]);
     // }, [sortColumn, sortDirection, pageSize, pageIndex, filterColumn, filterQuery, api, fetch, url]);
 
     useEffect(() => {
         setloading(true);
         const call = async () => {
             try {
-                setData(await fetch(url));
-                setloading(false);
+                if (url !== '') {
+                    const temp = await fetch(url);
+                    if (temp && temp.data && temp.data.length > 0) {
+                        // Data exists, proceed with setting it
+                        setData(temp);
+                        setloading(false);
+                    } else {
+                        // Handle empty or invalid data
+                        console.warn('No data available or invalid response');
+                        setloading(false);
+                    }
+                }
             } catch (ex) {
+                console.error('Error fetching data:', ex);
                 setloading(false);
             }
         };
         call();
-    }, [fetch, url]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [url]);
     const handleSort = (column: string) => {
         setSortColumn(column);
         setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
