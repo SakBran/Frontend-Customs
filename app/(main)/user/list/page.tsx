@@ -34,7 +34,7 @@ const UserTableAction = ({ id }: Props) => {
     };
     return (
         <td>
-            <Link href={`User/${id}`} style={{ cursor: 'pointer' }}>
+            <Link href={`/user/${id}`} style={{ cursor: 'pointer' }}>
                 Edit
             </Link>
             |
