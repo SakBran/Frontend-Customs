@@ -15,34 +15,38 @@ const AppMenu = () => {
             label: 'Users',
             items: [
                 { label: 'Users', icon: 'pi pi-fw pi-users', to: '/user/list' },
-                { label: 'Add new user', icon: 'pi pi-user-plus', to: '/user/new' }
+                { label: 'Add new user', icon: 'pi pi-fw pi-user-plus', to: '/user/new' }
             ]
         },
         {
             label: 'IRD-CEIR ID List',
-            items: [{ label: 'CEIR ID List', icon: 'pi pi-server', to: '/CEIRD' }]
+            items: [{ label: 'CEIR ID List', icon: 'pi pi-fw pi-server', to: '/CEIRD' }]
         },
         {
             label: 'Operations',
             items: [
-                { label: 'Sent List', icon: 'pi pi-file-export', to: '/sentList' },
-                { label: 'Failed List', icon: 'pi pi-ban', to: '/failedList' },
-                { label: 'Not Sent List', icon: 'pi pi-wrench', to: '/notSentList' },
-                { label: 'Duplicate List', icon: 'pi pi-clone', to: '/duplicateList' },
-                { label: 'Delete List', icon: 'pi pi-trash', to: '/deleteList' }
+                { label: 'Sent List', icon: 'pi pi-fw pi-file-export', to: '/sentList' },
+                { label: 'Failed List', icon: 'pi pi-fw pi-ban', to: '/failedList' },
+                { label: 'Not Sent List', icon: 'pi pi-fw pi-wrench', to: '/notSentList' },
+                { label: 'Duplicate List', icon: 'pi pi-fw pi-clone', to: '/duplicateList' },
+                { label: 'Delete List', icon: 'pi pi-fw pi-trash', to: '/deleteList' }
             ]
         },
         {
             label: 'Logs',
-            items: [{ label: 'User Logs', icon: 'pi pi-book', to: '/userLogs' }]
+            items: [{ label: 'User Logs', icon: 'pi pi-fw pi-book', to: '/userLogs' }]
         },
         {
             label: 'Report',
             items: [
-                { label: 'Report 1', icon: 'pi pi-chart-bar', to: '/1' },
-                { label: 'Report 2', icon: 'pi pi-chart-bar', to: '/2' },
-                { label: 'Report 3', icon: 'pi pi-chart-bar', to: '/3' }
+                { label: 'Report 1', icon: 'pi pi-fw pi-chart-bar', to: '/1' },
+                { label: 'Report 2', icon: 'pi pi-fw pi-chart-bar', to: '/2' },
+                { label: 'Report 3', icon: 'pi pi-fw pi-chart-bar', to: '/3' }
             ]
+        },
+        {
+            label: 'Settings',
+            items: [{ label: 'System Setting', icon: 'pi pi-fw pi-cog', to: '/setting/list' }]
         }
     ];
 
