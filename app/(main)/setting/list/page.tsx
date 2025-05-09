@@ -34,7 +34,7 @@ const UserTableAction = ({ id }: Props) => {
     };
     return (
         <td>
-            <Link href={`/SystemSetting/${id}`} style={{ cursor: 'pointer' }}>
+            <Link href={`/setting/${id}`} style={{ cursor: 'pointer' }}>
                 Edit
             </Link>
             |
@@ -67,7 +67,7 @@ const page = () => {
             <div className="card">
                 <BasicTable
                     api={'SystemSetting'}
-                    displayData={['sourceFolder', 'completeFolder', 'toReadfileName', 'fileNameStartsWith', 'id']}
+                    displayData={['sourceFolder', 'completeFolder', 'toReadFileName', 'toReadFileNameStartWith', 'id']}
                     fetch={async (url) => {
                         const response = await Get(url);
                         return transformUserData(response);

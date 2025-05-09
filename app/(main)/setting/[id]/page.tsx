@@ -17,7 +17,7 @@ const Edit = ({ params }: Props) => {
     useEffect(() => {
         setloading(true);
         const fetchUser = async () => {
-            const response = await GetSingle(`User/${unwrappedParams.id}`);
+            const response = await GetSingle(`SystemSetting/${unwrappedParams.id}`);
 
             if (!response) {
                 Swal.fire({
