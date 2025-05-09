@@ -67,7 +67,7 @@ const page = () => {
             <div className="card">
                 <BasicTable
                     api={'SystemSetting'}
-                    displayData={['name', 'password', 'permission', 'isActive', 'id']}
+                    displayData={['sourceFolder', 'completeFolder', 'toReadfileName', 'fileNameStartsWith', 'id']}
                     fetch={async (url) => {
                         const response = await Get(url);
                         return transformUserData(response);
