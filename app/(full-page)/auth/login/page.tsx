@@ -24,7 +24,7 @@ const LoginPage = () => {
                 username: username,
                 password: password
             };
-            const resp = await axiosInstance.post('auth', data);
+            const resp = await axiosInstance.post('auth/Login', data);
             const temp = await resp.data;
             if (temp) {
                 if (temp) {
@@ -77,7 +77,7 @@ const LoginPage = () => {
                 >
                     <div className="w-full surface-card py-8 px-5 sm:px-8" style={{ borderRadius: '53px' }}>
                         <div className="text-center mb-5">
-                            <img src={`/layout/images/logo.svg`} alt="Sakai logo" className="mb-5 w-6rem flex-shrink-0" />
+                            <img src={`/layout/images/logo.png`} alt="Sakai logo" className="mb-5 w-6rem flex-shrink-0" />
                             <div className="text-900 text-3xl font-medium mb-3">Welcome, User!</div>
                             <span className="text-600 font-medium">Sign in to continue</span>
                         </div>

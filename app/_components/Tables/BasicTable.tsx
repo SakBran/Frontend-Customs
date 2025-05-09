@@ -145,7 +145,7 @@ export const BasicTable: React.FC<PropsType> = ({
                     )}
                     {loading && (
                         <tbody>
-                            {Array.from({ length: pageSize }).map((_, rowIndex) => (
+                            {Array.from({ length: Math.min(pageSize, 100) }).map((_, rowIndex) => (
                                 <tr key={rowIndex}>
                                     <td>
                                         <div className="skeleton skeleton-text">
@@ -265,7 +265,7 @@ export const BasicTable: React.FC<PropsType> = ({
                         value={pageSize}
                         onChange={(e) => setPageSize(Number(e.target.value))}
                     >
-                        {[5, 10, 20, 50, 100].map((size) => (
+                        {[5, 10, 20, 50, 100, 1000, 10000].map((size) => (
                             <option key={size} value={size}>
                                 {size}
                             </option>

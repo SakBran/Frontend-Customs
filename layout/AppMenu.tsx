@@ -46,7 +46,10 @@ const AppMenu = () => {
         },
         {
             label: 'Settings',
-            items: [{ label: 'System Setting', icon: 'pi pi-fw pi-cog', to: '/setting/list' }]
+            items: [
+                { label: 'System Setting', icon: 'pi pi-fw pi-cog', to: '/setting/list' },
+                { label: 'Add new Setting', icon: 'pi pi-fw pi-plus-circle', to: '/setting/new' }
+            ]
         }
     ];
 
