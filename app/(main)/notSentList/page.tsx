@@ -40,7 +40,6 @@ const ResendAction = ({ id }: Props) => {
             },
             allowOutsideClick: () => !Swal.isLoading()
         }).then((result) => {
-            router.refresh();
             if (result.isConfirmed) {
                 Swal.fire({
                     title: 'Success',
@@ -75,7 +74,6 @@ const ResendAction = ({ id }: Props) => {
                 onClick={(e) => {
                     e.preventDefault();
                     EditModal(id);
-                    router.refresh();
                 }}
                 href={''}
                 style={{ cursor: 'pointer' }}
