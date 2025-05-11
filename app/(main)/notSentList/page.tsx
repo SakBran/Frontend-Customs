@@ -31,7 +31,7 @@ const ResendAction = ({ id }: Props) => {
                 }
 
                 try {
-                    const apiUrl = `CustomsData`;
+                    const apiUrl = `Operation`;
                     const response = await Put(apiUrl, id, { ceirId, remark });
                     return response;
                 } catch (error) {
@@ -60,7 +60,7 @@ const ResendAction = ({ id }: Props) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 const sendAction = async () => {
-                    const response = await Post('CustomsData', { id: id });
+                    const response = await Post('Operation', { id: id });
                     if (response) {
                         Swal.fire('Send!', 'Data is successfully transfered', 'success');
                         router.refresh();
@@ -156,7 +156,7 @@ const page = () => {
                 <div className="row">
                     <div className="col-12">
                         <BasicTable
-                            api={'CustomsData/NotSentList'}
+                            api={'Operation/NotSentList'}
                             displayData={['ceirid', 'receivedDatetime', 'maccsCEIRID', 'roNo', 'roDate', 'cd', 'ct', 'at', 'rf', 'sentDatetime', 'remark', 'editBy', 'id']}
                             fetch={async (url) => {
                                 const response = await Get(url);

@@ -72,7 +72,7 @@ const page = () => {
                 <div className="row">
                     <div className="col-12">
                         <BasicTable
-                            api={'CustomsData/SentList'}
+                            api={'Operation/SentList'}
                             displayData={['ceirid', 'receivedDatetime', 'maccsCEIRID', 'roNo', 'roDate', 'cd', 'ct', 'at', 'rf', 'sentDatetime']}
                             fetch={async (url) => {
                                 const response = await Get(url);
