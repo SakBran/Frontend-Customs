@@ -76,7 +76,7 @@ const page = () => {
                     <div className="col-12">
                         <BasicTable
                             api={'User'}
-                            displayData={['CEIRID', 'ReceivedDatetime', 'isSent', 'SendDatetime']}
+                            displayData={['CEIRID', 'receivedDatetime', 'isSent', 'SendDatetime']}
                             fetch={async (url) => {
                                 const response = await Get(url);
                                 return transformUserData(response);

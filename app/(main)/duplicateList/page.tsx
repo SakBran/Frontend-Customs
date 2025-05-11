@@ -77,7 +77,7 @@ const page = () => {
                     <div className="col-12">
                         <BasicTable
                             api={'CustomsData/DuplicateList'}
-                            displayData={['IRD-CEIR-ID', 'ReceivedDatetime', 'MACCS-CEIR-ID', 'Edit CEIRID', 'RO-No', 'RO-Date', 'CD', 'CT', 'AT', 'RF']}
+                            displayData={['ceirid', 'receivedDatetime', 'maccsCEIRID', 'oldCeirid', 'roNo', 'roDate', 'cd', 'ct', 'at', 'rf']}
                             fetch={async (url) => {
                                 const response = await Get(url);
                                 return transformUserData(response);
