@@ -60,9 +60,13 @@ const ResendAction = ({ id }: Props) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 const sendAction = async () => {
-                    const response = await Post('resend', { id: id });
-                    Swal.fire('Deleted!', 'Data is successfully transfered', 'success');
-                    router.refresh();
+                    const response = await Post('CustomsData', { id: id });
+                    if (response) {
+                        Swal.fire('Send!', 'Data is successfully transfered', 'success');
+                        router.refresh();
+                    } else {
+                        Swal.fire('Error!', 'Something went wrong', 'error');
+                    }
                 };
                 sendAction();
             }

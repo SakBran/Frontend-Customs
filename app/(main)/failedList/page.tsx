@@ -1,19 +1,50 @@
 'use client';
 import { BasicTable } from '@/app/_components/Tables/BasicTable';
 import { PaginationType } from '@/app/_models/PaginationType';
-import { Get } from '@/app/_services/BasicHttpServices';
+import { Get, Post } from '@/app/_services/BasicHttpServices';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
+import Swal from 'sweetalert2';
 
 type Props = {
     id: string;
 };
 
 const ResendAction = ({ id }: Props) => {
+    const router = useRouter();
+    const SendModal = (id: string) => {
+        Swal.fire({
+            title: 'Do you want to send the changes?',
+            showCancelButton: true,
+            confirmButtonText: 'Send'
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                const sendAction = async () => {
+                    const response = await Post('CustomsData', { id: id });
+                    if (response) {
+                        Swal.fire('Send!', 'Data is successfully transfered', 'success');
+                        router.refresh();
+                    } else {
+                        Swal.fire('Error!', 'Something went wrong', 'error');
+                    }
+                };
+                sendAction();
+            }
+        });
+    };
     return (
         <td>
-            <Link href={'edit/' + id} style={{ cursor: 'pointer' }}>
-                Resend
+            <Link
+                onClick={(e) => {
+                    e.preventDefault();
+                    SendModal(id);
+                }}
+                href={''}
+                style={{ cursor: 'pointer' }}
+            >
+                Re Send
             </Link>
         </td>
     );
