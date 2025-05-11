@@ -31,51 +31,53 @@ export const GetSingle = async (url: string): Promise<any> => {
 };
 
 export const Post = async (url: string, data: unknown): Promise<any> => {
-    const resp = await axiosInstance.post(url, data);
-    if (resp.status < 200 || resp.status >= 300) {
+    try {
+        const resp = await axiosInstance.post(url, data);
+        return resp.data;
+    } catch (error: any) {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong!'
+            text: error?.response?.data?.message || 'Something went wrong!'
         });
+        throw error; // Optional: rethrow if you want to handle it further up
     }
-    const temp = await resp.data;
-    const responseData: PaginationType = JSON.parse(JSON.stringify(temp));
-    return responseData;
 };
 
 export const Put = async (url: string, id: string, data: unknown): Promise<any> => {
-    const jsonObject = data as { [key: string]: unknown };
-    jsonObject.id = id;
-    const resp = await axiosInstance.put(url + '/' + id, jsonObject);
-    if (resp.status < 200 || resp.status >= 300) {
+    try {
+        const jsonObject = data as { [key: string]: unknown };
+        jsonObject.id = id;
+
+        const resp = await axiosInstance.put(`${url}/${id}`, jsonObject);
+        return resp.data;
+    } catch (error: any) {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong!'
+            text: error?.response?.data?.message || 'Something went wrong!'
         });
+        throw error; // Optional: rethrow for upstream handling
     }
-    const temp = await resp.data;
-    const responseData: PaginationType = JSON.parse(JSON.stringify(temp));
-    return responseData;
 };
 
 export const Delete = async (url: string, id: string): Promise<any> => {
-    const resp = await axiosInstance.delete(url + '/' + id);
-    if (resp.status < 200 || resp.status >= 300) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!'
-        });
-    } else {
+    try {
+        const resp = await axiosInstance.delete(`${url}/${id}`);
+
         Swal.fire({
             icon: 'success',
             title: 'Deleted',
             text: 'Successfully Deleted!'
         });
+
+        return resp.data;
+    } catch (error: any) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error?.response?.data?.message || 'Something went wrong!'
+        });
+        throw error; // Optional: rethrow if upstream handling is needed
     }
-    const temp = await resp.data;
-    const responseData: PaginationType = JSON.parse(JSON.stringify(temp));
-    return responseData;
 };
