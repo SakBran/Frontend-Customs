@@ -14,7 +14,7 @@ export interface FormData {
     permission: string;
     password: string;
     isActive: string;
-    fullname: string;
+    fullName: string;
     id: string;
 }
 
@@ -90,9 +90,9 @@ const UserForm: React.FC<{ onLoadData?: FormData }> = ({ onLoadData }) => {
         <div className="p-fluid">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="field">
-                    <label htmlFor="fullname">Full Name</label>
-                    <Controller name="fullname" control={control} rules={{ required: 'Username is required.' }} render={({ field }) => <InputText id={field.name} {...field} className={classNames({ 'p-invalid': errors.fullname })} />} />
-                    {getFormErrorMessage('fullname')}
+                    <label htmlFor="fullName">Full Name</label>
+                    <Controller name="fullName" control={control} rules={{ required: 'Username is required.' }} render={({ field }) => <InputText id={field.name} {...field} className={classNames({ 'p-invalid': errors.fullName })} />} />
+                    {getFormErrorMessage('fullName')}
                 </div>
 
                 <div className="field">
