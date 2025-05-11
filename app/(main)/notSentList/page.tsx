@@ -15,18 +15,24 @@ const ResendAction = ({ id }: Props) => {
     const router = useRouter();
     const EditModal = (id: string) => {
         Swal.fire({
-            title: 'Please enter correrct CEIR ID to resend',
-            input: 'text',
-            inputAttributes: {
-                autocapitalize: 'off'
-            },
+            title: 'Please enter CEIR ID and Remark to resend',
+            html: `<input id="ceir-id" class="swal2-input" placeholder="CEIR ID">` + `<input id="remark" class="swal2-input" placeholder="Remark">`,
+            focusConfirm: false,
             showCancelButton: true,
             confirmButtonText: 'Save',
             showLoaderOnConfirm: true,
-            preConfirm: async (ceirId) => {
+            preConfirm: async () => {
+                const ceirId = (document.getElementById('ceir-id') as HTMLInputElement).value;
+                const remark = (document.getElementById('remark') as HTMLInputElement).value;
+
+                if (!ceirId || !remark) {
+                    Swal.showValidationMessage('Both CEIR ID and Remark are required');
+                    return;
+                }
+
                 try {
-                    const apiUrl = `ceirid`;
-                    const response = await Put(apiUrl, id, ceirId);
+                    const apiUrl = `CustomsData`;
+                    const response = await Put(apiUrl, id, { ceirId, remark });
                     return response;
                 } catch (error) {
                     Swal.showValidationMessage(`Request failed: ${error}`);
@@ -34,13 +40,15 @@ const ResendAction = ({ id }: Props) => {
             },
             allowOutsideClick: () => !Swal.isLoading()
         }).then((result) => {
+            router.refresh();
             if (result.isConfirmed) {
                 Swal.fire({
                     title: 'Success',
                     text: 'Data is successfully updated',
                     icon: 'success'
+                }).then(() => {
+                    router.refresh();
                 });
-                router.refresh();
             }
         });
     };
@@ -67,6 +75,7 @@ const ResendAction = ({ id }: Props) => {
                 onClick={(e) => {
                     e.preventDefault();
                     EditModal(id);
+                    router.refresh();
                 }}
                 href={''}
                 style={{ cursor: 'pointer' }}

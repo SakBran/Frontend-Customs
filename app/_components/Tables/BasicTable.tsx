@@ -63,9 +63,7 @@ export const BasicTable: React.FC<PropsType> = ({
             temp = temp + `&filterColumn=${filterColumn}&filterQuery=${filterQuery}`;
         }
         setUrl(temp);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sortColumn, sortDirection, pageSize, pageIndex, filterColumn, filterQuery]);
-    // }, [sortColumn, sortDirection, pageSize, pageIndex, filterColumn, filterQuery, api, fetch, url]);
+    }, [sortColumn, sortDirection, pageSize, pageIndex, filterColumn, filterQuery, api]);
 
     useEffect(() => {
         setloading(true);
@@ -89,8 +87,7 @@ export const BasicTable: React.FC<PropsType> = ({
             }
         };
         call();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [url]);
+    }, [fetch, url]);
     const handleSort = (column: string) => {
         setSortColumn(column);
         setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
