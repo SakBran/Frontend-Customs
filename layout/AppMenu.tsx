@@ -9,8 +9,10 @@ import { AppMenuItem } from '@/types';
 
 const AppMenu = () => {
     const { layoutConfig } = useContext(LayoutContext);
-
-    const model: AppMenuItem[] = [
+    // Administrator – All permission, user management, edit CEIRD နှင့် Resent တို့ပါပြုလုပ်နိုင်ပါမည်။
+    // Incharge – view all, edit CEIRD နှင့် Resent တို့ပါပြုလုပ်နိုင်ပါမည်။
+    // Operator – View only
+    const Administrator: AppMenuItem[] = [
         {
             label: 'Users',
             items: [
@@ -52,6 +54,41 @@ const AppMenu = () => {
             ]
         }
     ];
+    const InchargeAndOperator: AppMenuItem[] = [
+        {
+            label: 'IRD-CEIR ID List',
+            items: [{ label: 'CEIR ID List', icon: 'pi pi-fw pi-server', to: '/CEIRD' }]
+        },
+        {
+            label: 'Operations',
+            items: [
+                { label: 'Sent List', icon: 'pi pi-fw pi-file-export', to: '/sentList' },
+                { label: 'Failed List', icon: 'pi pi-fw pi-ban', to: '/failedList' },
+                { label: 'Not Sent List', icon: 'pi pi-fw pi-wrench', to: '/notSentList' },
+                { label: 'Duplicate List', icon: 'pi pi-fw pi-clone', to: '/duplicateList' },
+                { label: 'Delete List', icon: 'pi pi-fw pi-trash', to: '/deleteList' }
+            ]
+        },
+
+        {
+            label: 'Report',
+            items: [
+                { label: 'Report 1', icon: 'pi pi-fw pi-chart-bar', to: '/1' },
+                { label: 'Report 2', icon: 'pi pi-fw pi-chart-bar', to: '/2' },
+                { label: 'Report 3', icon: 'pi pi-fw pi-chart-bar', to: '/3' }
+            ]
+        }
+    ];
+
+    const Permission = sessionStorage.getItem('permission');
+    var model: AppMenuItem[] = [];
+    if (Permission) {
+        if (Permission == 'Administrator') {
+            model = [...Administrator];
+        } else {
+            model = [...InchargeAndOperator];
+        }
+    }
 
     return (
         <MenuProvider>
@@ -59,10 +96,6 @@ const AppMenu = () => {
                 {model.map((item, i) => {
                     return !item?.seperator ? <AppMenuitem item={item} root={true} index={i} key={item.label} /> : <li className="menu-separator"></li>;
                 })}
-
-                {/* <Link href="https://blocks.primereact.org" target="_blank" style={{ cursor: 'pointer' }}>
-                    <img alt="Prime Blocks" className="w-full mt-3" src={`/layout/images/banner-primeblocks${layoutConfig.colorScheme === 'light' ? '' : '-dark'}.png`} />
-                </Link> */}
             </ul>
         </MenuProvider>
     );

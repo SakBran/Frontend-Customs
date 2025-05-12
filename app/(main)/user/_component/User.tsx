@@ -19,9 +19,9 @@ export interface FormData {
 }
 
 const roles = [
-    { label: 'Admin', value: 'Admin' },
-    { label: 'User', value: 'User' },
-    { label: 'Guest', value: 'Guest' }
+    { label: 'Administrator', value: 'Administrator' },
+    { label: 'Incharge', value: 'Incharge' },
+    { label: 'Operator', value: 'Operator' }
 ];
 
 const isActives = [
