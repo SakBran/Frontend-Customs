@@ -50,6 +50,7 @@ export const BasicTable: React.FC<PropsType> = ({
     const [data, setData] = useState<PaginationType>(intialValue);
 
     const [url, setUrl] = useState('');
+    const Permission = sessionStorage.getItem('permission');
 
     //ဒီထဲကParameterက Dotnet Core ထဲကPagination Getနဲ့ညှိပေးထားတာ
     //တကယ်လို့ပြင်ချင်ရင် Parameter တွေပြင်သုံးပေါ့
@@ -112,7 +113,7 @@ export const BasicTable: React.FC<PropsType> = ({
                                     return '';
                                 }
                             })}
-                            {displayData.includes('id') && <td>Action</td>}
+                            {displayData.includes('id') && Permission !== 'Operator' && <td>Action</td>}
                         </tr>
                     </thead>
 
@@ -134,7 +135,7 @@ export const BasicTable: React.FC<PropsType> = ({
                                         {data}
                                         {/* <TableAction id={row['id']} /> */}
 
-                                        {actionComponent ? actionComponent({ id: row['id'] }) : null}
+                                        {actionComponent && Permission !== 'Operator' ? actionComponent({ id: row['id'] }) : null}
                                     </tr>
                                 );
                             })}
@@ -162,7 +163,7 @@ export const BasicTable: React.FC<PropsType> = ({
                                             return null;
                                         }
                                     })}
-                                    {displayData.includes('id') && (
+                                    {displayData.includes('id') && Permission !== 'Operator' && (
                                         <td>
                                             <div className="skeleton skeleton-button">
                                                 <img src={`/layout/images/table-skeleton.svg`} alt="..." height="12" className="mr-2" />
