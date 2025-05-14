@@ -120,48 +120,6 @@ const SystemSettingForm: React.FC<{ onLoadData?: FormData }> = ({ onLoadData }) 
                 </div>
 
                 <div className="field">
-                    <label htmlFor="ceirid">CEIR ID</label>
-                    <Controller name="ceirid" control={control} rules={{ required: 'CEIR ID is required.' }} render={({ field }) => <InputText id={field.name} {...field} className={classNames({ 'p-invalid': errors.ceirid })} />} />
-                    {getFormErrorMessage('ceirid')}
-                </div>
-
-                <div className="field">
-                    <label htmlFor="roNo">RO No</label>
-                    <Controller name="roNo" control={control} rules={{ required: 'RO No is required.' }} render={({ field }) => <InputText id={field.name} {...field} className={classNames({ 'p-invalid': errors.roNo })} />} />
-                    {getFormErrorMessage('roNo')}
-                </div>
-
-                <div className="field">
-                    <label htmlFor="roDate">RO Date</label>
-                    <Controller name="roDate" control={control} rules={{ required: 'RO Date is required.' }} render={({ field }) => <InputText id={field.name} {...field} className={classNames({ 'p-invalid': errors.roDate })} />} />
-                    {getFormErrorMessage('roDate')}
-                </div>
-
-                <div className="field">
-                    <label htmlFor="cd">CD</label>
-                    <Controller name="cd" control={control} rules={{ required: 'CD is required.' }} render={({ field }) => <InputText id={field.name} {...field} className={classNames({ 'p-invalid': errors.cd })} />} />
-                    {getFormErrorMessage('cd')}
-                </div>
-
-                <div className="field">
-                    <label htmlFor="ct">CT</label>
-                    <Controller name="ct" control={control} rules={{ required: 'CT is required.' }} render={({ field }) => <InputText id={field.name} {...field} className={classNames({ 'p-invalid': errors.ct })} />} />
-                    {getFormErrorMessage('ct')}
-                </div>
-
-                <div className="field">
-                    <label htmlFor="at">AT</label>
-                    <Controller name="at" control={control} rules={{ required: 'AT is required.' }} render={({ field }) => <InputText id={field.name} {...field} className={classNames({ 'p-invalid': errors.at })} />} />
-                    {getFormErrorMessage('at')}
-                </div>
-
-                <div className="field">
-                    <label htmlFor="rf">RF</label>
-                    <Controller name="rf" control={control} rules={{ required: 'RF is required.' }} render={({ field }) => <InputText id={field.name} {...field} className={classNames({ 'p-invalid': errors.rf })} />} />
-                    {getFormErrorMessage('rf')}
-                </div>
-
-                <div className="field">
                     <label htmlFor="authorizationTokenURL_CEIR">Authorization Token URL</label>
                     <Controller
                         name="authorizationTokenURL_CEIR"
