@@ -1,10 +1,12 @@
 'use client';
 import { BasicTable } from '@/app/_components/Tables/BasicTable';
+import useQueryString from '@/app/_hooks/useQueryString';
 import { PaginationType } from '@/app/_models/PaginationType';
 import { Get } from '@/app/_services/BasicHttpServices';
-import React from 'react';
+import React, { useState } from 'react';
 
-const page = () => {
+const Page = () => {
+    const { queryString, generateQueryString } = useQueryString();
     const transformUserData = (data: PaginationType): PaginationType => {
         return {
             ...data,
@@ -14,12 +16,13 @@ const page = () => {
             }))
         };
     };
+
     return (
         <div className="col-12 xl:col-12">
             <div className="card">
                 <div className="row">
                     <div className="col-12">
-                        <form className="grid formgrid">
+                        <form className="grid formgrid" onSubmit={generateQueryString}>
                             <div className="field col-12 md:col-6 flex flex-column">
                                 <label htmlFor="fromDate" className="mb-2">
                                     Delete Date From
@@ -73,7 +76,7 @@ const page = () => {
                             api={'DeleteLogs'}
                             displayData={['ceirid', 'receivedDatetime', 'isSent', 'sendDatetime']}
                             fetch={async (url) => {
-                                const response = await Get(url);
+                                const response = await Get(url + '&' + queryString);
                                 return transformUserData(response);
                             }}
                         />
@@ -84,4 +87,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

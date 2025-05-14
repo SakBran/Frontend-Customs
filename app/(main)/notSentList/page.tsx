@@ -1,5 +1,6 @@
 'use client';
 import { BasicTable } from '@/app/_components/Tables/BasicTable';
+import useQueryString from '@/app/_hooks/useQueryString';
 import { PaginationType } from '@/app/_models/PaginationType';
 import { Get, Post, Put } from '@/app/_services/BasicHttpServices';
 import Link from 'next/link';
@@ -99,7 +100,8 @@ const ResendAction = ({ id }: Props) => {
     );
 };
 
-const page = () => {
+const Page = () => {
+    const { queryString, generateQueryString } = useQueryString();
     const transformUserData = (data: PaginationType): PaginationType => {
         return {
             ...data,
@@ -114,18 +116,18 @@ const page = () => {
             <div className="card">
                 <div className="row">
                     <div className="col-12">
-                        <form className="grid formgrid">
+                        <form className="grid formgrid" onSubmit={generateQueryString}>
                             <div className="field col-12 md:col-6 flex flex-column">
-                                <label htmlFor="fromDate" className="mb-2">
+                                <label htmlFor="roDateFrom" className="mb-2">
                                     RO Date From
                                 </label>
-                                <input type="date" id="fromDate" name="fromDate" className="p-inputtext p-component" />
+                                <input type="date" id="roDateFrom" name="roDateFrom" className="p-inputtext p-component" />
                             </div>
                             <div className="field col-12 md:col-6 flex flex-column">
-                                <label htmlFor="toDate" className="mb-2">
+                                <label htmlFor="roDateTo" className="mb-2">
                                     RO Date To
                                 </label>
-                                <input type="date" id="toDate" name="toDate" className="p-inputtext p-component" />
+                                <input type="date" id="roDateTo" name="roDateTo" className="p-inputtext p-component" />
                             </div>
 
                             <div className="field col-12 md:col-6 flex flex-column">
@@ -135,10 +137,10 @@ const page = () => {
                                 <input type="text" id="ceirId" name="ceirId" className="p-inputtext p-component" />
                             </div>
                             <div className="field col-12 md:col-6 flex flex-column">
-                                <label htmlFor="ceirId" className="mb-2">
+                                <label htmlFor="roNo" className="mb-2">
                                     RO No
                                 </label>
-                                <input type="text" id="ceirId" name="ceirId" className="p-inputtext p-component" />
+                                <input type="text" id="roNo" name="roNo" className="p-inputtext p-component" />
                             </div>
                             <div className="field col-12">
                                 <div className="flex justify-content-end gap-2">
@@ -159,7 +161,7 @@ const page = () => {
                             api={'Operation/NotSentList'}
                             displayData={['ceirid', 'receivedDatetime', 'maccsCEIRID', 'roNo', 'roDate', 'cd', 'ct', 'at', 'rf', 'sendBy', 'sentDatetime', 'remark', 'editBy', 'editDatetime', 'id']}
                             fetch={async (url) => {
-                                const response = await Get(url);
+                                const response = await Get(url + '&' + queryString);
                                 return transformUserData(response);
                             }}
                             actionComponent={ResendAction}
@@ -171,4 +173,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

@@ -77,7 +77,8 @@ export const BasicTable: React.FC<PropsType> = ({
                         setData(temp);
                         setloading(false);
                     } else {
-                        // Handle empty or invalid data
+                        // Handle empty or invalid data'
+                        setData(intialValue);
                         console.warn('No data available or invalid response');
                         setloading(false);
                     }
@@ -141,6 +142,7 @@ export const BasicTable: React.FC<PropsType> = ({
                             })}
                         </tbody>
                     )}
+
                     {loading && (
                         <tbody>
                             {Array.from({ length: Math.min(pageSize, 100) }).map((_, rowIndex) => (
