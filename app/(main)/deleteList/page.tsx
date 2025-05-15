@@ -37,24 +37,29 @@ const Page = () => {
                             </div>
                             <div className="field col-12 md:col-6 flex flex-column">
                                 <label htmlFor="sentDateFrom" className="mb-2">
-                                    CEIR ID
+                                    Sent Date From
                                 </label>
                                 <input type="date" id="sentDateFrom" name="sentDateFrom" className="p-inputtext p-component" />
                             </div>
                             <div className="field col-12 md:col-6 flex flex-column">
                                 <label htmlFor="sentDateTo" className="mb-2">
-                                    RO No
+                                    Sent Date To
                                 </label>
                                 <input type="date" id="sentDateTo" name="sentDateTo" className="p-inputtext p-component" />
                             </div>
-
+                            <div className="field col-12 md:col-6 flex flex-column">
+                                <label htmlFor="ceirId" className="mb-2">
+                                    CEIR ID
+                                </label>
+                                <input type="text" id="ceirId" name="ceirId" className="p-inputtext p-component" />
+                            </div>
                             <div className="field col-12 md:col-6 flex flex-column">
                                 <label htmlFor="isSent" className="mb-2">
                                     Is Sent
                                 </label>
                                 <select id="isSent" name="isSent" className="p-inputtext p-component">
-                                    <option value="Sent">Sent</option>
-                                    <option value="Not Sent">Not Sent</option>
+                                    <option value="true">Sent</option>
+                                    <option value="false">Not Sent</option>
                                 </select>
                             </div>
                             <div className="field col-12">
@@ -73,7 +78,7 @@ const Page = () => {
                 <div className="row">
                     <div className="col-12">
                         <BasicTable
-                            api={'DeleteLogs'}
+                            api={'DeleteLogs/Filter'}
                             displayData={['ceirid', 'receivedDatetime', 'isSent', 'sendDatetime']}
                             fetch={async (url) => {
                                 const response = await Get(url + '&' + queryString);
