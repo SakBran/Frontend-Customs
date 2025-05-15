@@ -23,16 +23,16 @@ const Page = () => {
                     <div className="col-12">
                         <form className="grid formgrid" onSubmit={generateQueryString}>
                             <div className="field col-12 md:col-6 flex flex-column">
-                                <label htmlFor="roDateFrom" className="mb-2">
-                                    RO Date From
+                                <label htmlFor="receivedDatetimeFrom" className="mb-2">
+                                    Received Date From
                                 </label>
-                                <input type="date" id="roDateFrom" name="roDateFrom" className="p-inputtext p-component" />
+                                <input type="date" id="receivedDatetimeFrom" name="receivedDatetimeFrom" className="p-inputtext p-component" />
                             </div>
                             <div className="field col-12 md:col-6 flex flex-column">
-                                <label htmlFor="roDateTo" className="mb-2">
-                                    RO Date To
+                                <label htmlFor="receivedDatetimeTo" className="mb-2">
+                                    Received Date To
                                 </label>
-                                <input type="date" id="roDateTo" name="roDateTo" className="p-inputtext p-component" />
+                                <input type="date" id="receivedDatetimeTo" name="receivedDatetimeTo" className="p-inputtext p-component" />
                             </div>
                             <div className="field col-12 md:col-6 flex flex-column">
                                 <label htmlFor="sentDateFrom" className="mb-2">
@@ -57,8 +57,8 @@ const Page = () => {
                                     Is Sent
                                 </label>
                                 <select id="isSent" name="isSent" className="p-inputtext p-component">
-                                    <option value="Sent">Sent</option>
-                                    <option value="Not Sent">Not Sent</option>
+                                    <option value="true">Sent</option>
+                                    <option value="false">Not Sent</option>
                                 </select>
                             </div>
                             <div className="field col-12">
@@ -77,7 +77,7 @@ const Page = () => {
                 <div className="row">
                     <div className="col-12">
                         <BasicTable
-                            api={'CeirdFromIRD'}
+                            api={'CeirdFromIRD/Filter'}
                             displayData={['ceirid', 'receivedDatetime', 'isSent', 'sendDatetime']}
                             fetch={async (url) => {
                                 const response = await Get(url + '&' + queryString);
