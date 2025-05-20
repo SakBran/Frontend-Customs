@@ -14,7 +14,7 @@ const LoginPage = () => {
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [checked, setChecked] = useState(false);
-    const { layoutConfig } = useContext(LayoutContext);
+    const { layoutConfig, authChecked, setAuthChecked } = useContext(LayoutContext);
 
     const router = useRouter();
     const containerClassName = classNames('surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden', { 'p-input-filled': layoutConfig.inputStyle === 'filled' });
@@ -30,6 +30,9 @@ const LoginPage = () => {
                 if (temp) {
                     if (temp.token) {
                         localStorage.setItem('token', temp.token);
+                        setAuthChecked(true);
+                        router.push('/');
+                        console.log(authChecked);
                     } else {
                         console.error('Authentication response is missing token:', temp);
                     }
@@ -50,8 +53,8 @@ const LoginPage = () => {
                 }
             }
 
-            window.location.reload();
-            router.push('/');
+            //window.location.reload();
+
             console.log(temp);
         };
         auth();

@@ -45,6 +45,8 @@ export interface LayoutContextProps {
     setLayoutState: Dispatch<SetStateAction<LayoutState>>;
     onMenuToggle: () => void;
     showProfileSidebar: () => void;
+    authChecked: boolean;
+    setAuthChecked: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface MenuContextProps {

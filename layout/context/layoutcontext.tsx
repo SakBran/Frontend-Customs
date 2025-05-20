@@ -1,6 +1,7 @@
 'use client';
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import { LayoutState, ChildContainerProps, LayoutConfig, LayoutContextProps } from '@/types';
+import LoginPage from '@/app/(full-page)/auth/login/page';
 export const LayoutContext = createContext({} as LayoutContextProps);
 
 export const LayoutProvider = ({ children }: ChildContainerProps) => {
@@ -12,6 +13,7 @@ export const LayoutProvider = ({ children }: ChildContainerProps) => {
         theme: 'lara-light-blue',
         scale: 12
     });
+    const [authChecked, setAuthChecked] = useState(false);
 
     const [layoutState, setLayoutState] = useState<LayoutState>({
         staticMenuDesktopInactive: false,
@@ -52,8 +54,13 @@ export const LayoutProvider = ({ children }: ChildContainerProps) => {
         layoutState,
         setLayoutState,
         onMenuToggle,
-        showProfileSidebar
+        showProfileSidebar,
+        authChecked,
+        setAuthChecked
     };
+    useEffect(() => {
+        console.log('This is auth testing' + authChecked);
+    }, [authChecked]);
 
-    return <LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>;
+    return <LayoutContext.Provider value={value}>{!authChecked ? <LoginPage></LoginPage> : children}</LayoutContext.Provider>;
 };
