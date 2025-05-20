@@ -80,7 +80,7 @@ const AppMenu = () => {
         }
     ];
 
-    const Permission = sessionStorage.getItem('permission');
+    const Permission = localStorage.getItem('permission');
     var model: AppMenuItem[] = [];
     if (Permission) {
         if (Permission == 'Administrator') {

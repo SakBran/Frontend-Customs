@@ -29,19 +29,19 @@ const LoginPage = () => {
             if (temp) {
                 if (temp) {
                     if (temp.token) {
-                        sessionStorage.setItem('token', temp.token);
+                        localStorage.setItem('token', temp.token);
                     } else {
                         console.error('Authentication response is missing token:', temp);
                     }
 
                     if (temp.userId) {
-                        sessionStorage.setItem('userId', temp.userId);
+                        localStorage.setItem('userId', temp.userId);
                     } else {
                         console.error('Authentication response is missing userId:', temp);
                     }
 
                     if (temp.permission) {
-                        sessionStorage.setItem('permission', temp.permission);
+                        localStorage.setItem('permission', temp.permission);
                     } else {
                         console.error('Authentication response is missing permission:', temp);
                     }

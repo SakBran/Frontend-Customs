@@ -50,7 +50,7 @@ export const BasicTable: React.FC<PropsType> = ({
     const [data, setData] = useState<PaginationType>(intialValue);
 
     const [url, setUrl] = useState('');
-    const Permission = sessionStorage.getItem('permission');
+    const Permission = localStorage.getItem('permission');
 
     //ဒီထဲကParameterက Dotnet Core ထဲကPagination Getနဲ့ညှိပေးထားတာ
     //တကယ်လို့ပြင်ချင်ရင် Parameter တွေပြင်သုံးပေါ့

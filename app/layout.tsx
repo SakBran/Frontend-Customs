@@ -21,7 +21,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     const [authChecked, setAuthChecked] = useState(false);
 
     useEffect(() => {
-        const token = sessionStorage.getItem('token');
+        const token = localStorage.getItem('token');
 
         if (token) {
             const authChecked = async () => {

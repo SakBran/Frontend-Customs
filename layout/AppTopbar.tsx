@@ -41,7 +41,7 @@ const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
                 <button
                     type="button"
                     onClick={() => {
-                        sessionStorage.clear();
+                        localStorage.clear();
                         window.location.reload();
                     }}
                     className="p-link layout-topbar-button"
