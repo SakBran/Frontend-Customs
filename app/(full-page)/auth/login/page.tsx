@@ -9,6 +9,7 @@ import { LayoutContext } from '../../../../layout/context/layoutcontext';
 import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 import axiosInstance from '@/app/_services/AxiosInstance';
+import Swal from 'sweetalert2';
 
 const LoginPage = () => {
     const [username, setUserName] = useState('');
@@ -24,49 +25,69 @@ const LoginPage = () => {
                 username: username,
                 password: password
             };
-            const resp = await axiosInstance.post('auth/Login', data);
-            const temp = await resp.data;
-            if (temp) {
-                if (temp) {
-                    if (temp.token) {
-                        localStorage.setItem('token', temp.token);
-                        setAuthChecked(true);
-                        router.push('/');
-                        console.log(authChecked);
-                    } else {
-                        console.error('Authentication response is missing token:', temp);
-                    }
 
-                    if (temp.userId) {
-                        localStorage.setItem('userId', temp.userId);
-                    } else {
-                        console.error('Authentication response is missing userId:', temp);
-                    }
-
-                    if (temp.permission) {
-                        localStorage.setItem('permission', temp.permission);
-                    } else {
-                        console.error('Authentication response is missing permission:', temp);
-                    }
-                } else {
-                    console.error('Authentication response is null or undefined:', temp);
+            // Show loading
+            Swal.fire({
+                title: 'Logging in...',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
                 }
+            });
+
+            try {
+                const resp = await axiosInstance.post('auth/Login', data);
+                const temp = await resp.data;
+
+                if (!temp || !temp.token) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Login failed',
+                        text: 'Invalid response from server.'
+                    });
+                    console.error('Invalid response:', temp);
+                    return;
+                }
+
+                // Save token
+                localStorage.setItem('token', temp.token);
+                setAuthChecked(true);
+
+                // Save other optional info
+                if (temp.userId) {
+                    localStorage.setItem('userId', temp.userId);
+                } else {
+                    console.warn('Missing userId in response');
+                }
+
+                if (temp.permission) {
+                    localStorage.setItem('permission', temp.permission);
+                } else {
+                    console.warn('Missing permission in response');
+                }
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login successful',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
+                // Redirect after short delay
+                setTimeout(() => {
+                    router.push('/');
+                }, 1600);
+            } catch (error) {
+                console.error('Login error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login failed',
+                    text: 'Something went wrong.'
+                });
             }
-
-            //window.location.reload();
-
-            console.log(temp);
         };
+
         auth();
-        // localStorage.setItem('AuthToken',password);
-
-        // window.location.reload();
-
-        // if(password === '777') {
-        //     router.push('/');
-        // }else{
-        //     router.push('/auth/login');
-        // }
     };
     return (
         <div className={containerClassName}>
