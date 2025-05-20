@@ -16,10 +16,6 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-    const router = useRouter();
-    const pathname = usePathname();
-    const { authChecked, setAuthChecked } = useContext(LayoutContext);
-
     return (
         <html lang="en" suppressHydrationWarning>
             <head>
