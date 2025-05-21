@@ -13,7 +13,13 @@ export const LayoutProvider = ({ children }: ChildContainerProps) => {
         theme: 'lara-light-blue',
         scale: 12
     });
-    const [authChecked, setAuthChecked] = useState(false);
+    const [authChecked, setAuthChecked] = useState(() => {
+        try {
+            return localStorage?.getItem('token') ? true : false;
+        } catch (err) {
+            return false;
+        }
+    });
 
     const [layoutState, setLayoutState] = useState<LayoutState>({
         staticMenuDesktopInactive: false,
