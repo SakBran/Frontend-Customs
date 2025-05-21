@@ -1,5 +1,5 @@
 'use client';
-import { BasicTable } from '@/app/_components/Tables/BasicTable';
+import { NotSentProps, NotSentTable } from '@/app/_components/Tables/NotSentTable';
 import useQueryString from '@/app/_hooks/useQueryString';
 import { PaginationType } from '@/app/_models/PaginationType';
 import { Get, Post, Put } from '@/app/_services/BasicHttpServices';
@@ -8,11 +8,7 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import Swal from 'sweetalert2';
 
-type Props = {
-    id: string;
-};
-
-const ResendAction = ({ id }: Props) => {
+const ResendAction = ({ id, ceirId, editCeirid }: NotSentProps) => {
     const router = useRouter();
     const EditModal = (id: string) => {
         Swal.fire({
@@ -85,17 +81,22 @@ const ResendAction = ({ id }: Props) => {
             >
                 Edit
             </Link>
-            |
-            <Link
-                onClick={(e) => {
-                    e.preventDefault();
-                    SendModal(id);
-                }}
-                href={''}
-                style={{ cursor: 'pointer' }}
-            >
-                Send
-            </Link>
+
+            {ceirId === editCeirid && ceirId !== '' && editCeirid !== '' && (
+                <>
+                    |
+                    <Link
+                        onClick={(e) => {
+                            e.preventDefault();
+                            SendModal(id);
+                        }}
+                        href={''}
+                        style={{ cursor: 'pointer' }}
+                    >
+                        Send
+                    </Link>
+                </>
+            )}
         </td>
     );
 };
@@ -157,9 +158,9 @@ const Page = () => {
                 </div>
                 <div className="row">
                     <div className="col-12">
-                        <BasicTable
+                        <NotSentTable
                             api={'Operation/NotSentList'}
-                            displayData={['ceirid', 'receivedDatetime', 'maccsCEIRID', 'roNo', 'roDate', 'cd', 'ct', 'at', 'rf', 'sendBy', 'sentDatetime', 'remark', 'editBy', 'editDatetime', 'id']}
+                            displayData={['ceirid', 'receivedDatetime', 'maccsCEIRID', 'editCeirid', 'roNo', 'roDate', 'cd', 'ct', 'at', 'rf', 'sendBy', 'sentDatetime', 'remark', 'editBy', 'editDatetime', 'id']}
                             fetch={async (url) => {
                                 const response = await Get(url + '&' + queryString);
                                 return transformUserData(response);
