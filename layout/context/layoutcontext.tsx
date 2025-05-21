@@ -2,6 +2,7 @@
 import React, { useState, createContext, useEffect } from 'react';
 import { LayoutState, ChildContainerProps, LayoutConfig, LayoutContextProps } from '@/types';
 import LoginPage from '@/app/(full-page)/auth/login/page';
+
 export const LayoutContext = createContext({} as LayoutContextProps);
 
 export const LayoutProvider = ({ children }: ChildContainerProps) => {
@@ -13,13 +14,9 @@ export const LayoutProvider = ({ children }: ChildContainerProps) => {
         theme: 'lara-light-blue',
         scale: 12
     });
-    const [authChecked, setAuthChecked] = useState(() => {
-        try {
-            return localStorage?.getItem('token') ? true : false;
-        } catch (err) {
-            return false;
-        }
-    });
+
+    const [authChecked, setAuthChecked] = useState(false);
+    const [checkingAuth, setCheckingAuth] = useState(true); // <- new state
 
     const [layoutState, setLayoutState] = useState<LayoutState>({
         staticMenuDesktopInactive: false,
@@ -32,27 +29,23 @@ export const LayoutProvider = ({ children }: ChildContainerProps) => {
 
     const onMenuToggle = () => {
         if (isOverlay()) {
-            setLayoutState((prevLayoutState) => ({ ...prevLayoutState, overlayMenuActive: !prevLayoutState.overlayMenuActive }));
+            setLayoutState((prev) => ({ ...prev, overlayMenuActive: !prev.overlayMenuActive }));
         }
 
         if (isDesktop()) {
-            setLayoutState((prevLayoutState) => ({ ...prevLayoutState, staticMenuDesktopInactive: !prevLayoutState.staticMenuDesktopInactive }));
+            setLayoutState((prev) => ({ ...prev, staticMenuDesktopInactive: !prev.staticMenuDesktopInactive }));
         } else {
-            setLayoutState((prevLayoutState) => ({ ...prevLayoutState, staticMenuMobileActive: !prevLayoutState.staticMenuMobileActive }));
+            setLayoutState((prev) => ({ ...prev, staticMenuMobileActive: !prev.staticMenuMobileActive }));
         }
     };
 
     const showProfileSidebar = () => {
-        setLayoutState((prevLayoutState) => ({ ...prevLayoutState, profileSidebarVisible: !prevLayoutState.profileSidebarVisible }));
+        setLayoutState((prev) => ({ ...prev, profileSidebarVisible: !prev.profileSidebarVisible }));
     };
 
-    const isOverlay = () => {
-        return layoutConfig.menuMode === 'overlay';
-    };
+    const isOverlay = () => layoutConfig.menuMode === 'overlay';
 
-    const isDesktop = () => {
-        return window.innerWidth > 991;
-    };
+    const isDesktop = () => window.innerWidth > 991;
 
     const value: LayoutContextProps = {
         layoutConfig,
@@ -64,9 +57,17 @@ export const LayoutProvider = ({ children }: ChildContainerProps) => {
         authChecked,
         setAuthChecked
     };
-    useEffect(() => {
-        console.log('This is auth testing' + authChecked);
-    }, [authChecked]);
 
-    return <LayoutContext.Provider value={value}>{!authChecked ? <LoginPage></LoginPage> : children}</LayoutContext.Provider>;
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        setAuthChecked(!!token);
+        setCheckingAuth(false); // <- update when check is done
+    }, []);
+
+    if (checkingAuth) {
+        // You can return a spinner or blank screen here
+        return null;
+    }
+
+    return <LayoutContext.Provider value={value}>{!authChecked ? <LoginPage /> : children}</LayoutContext.Provider>;
 };
