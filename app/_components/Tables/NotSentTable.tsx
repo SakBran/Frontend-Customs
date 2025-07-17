@@ -104,7 +104,7 @@ export const NotSentTable: React.FC<PropsType> = ({
     return (
         <>
             <div className="table-container">
-                <table>
+                <table id="notSentTable">
                     <thead>
                         <tr>
                             <td>No</td>

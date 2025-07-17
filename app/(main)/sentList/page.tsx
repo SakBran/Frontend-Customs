@@ -1,5 +1,6 @@
 'use client';
 import { BasicTable } from '@/app/_components/Tables/BasicTable';
+import { useExcelExport } from '@/app/_hooks/useExcelExport ';
 import useQueryString from '@/app/_hooks/useQueryString';
 import { PaginationType } from '@/app/_models/PaginationType';
 import { Get } from '@/app/_services/BasicHttpServices';
@@ -9,11 +10,11 @@ const Page = () => {
     const { queryString, generateQueryString } = useQueryString();
 
     const formatDateTime = (value: string) => {
-    if (!value || !value.includes('T')) return 'N/A'; 
-    const [date, time] = value.split('T');
-    const formattedTime = time?.split('.')[0]; 
-    return `${date} ${formattedTime}`;
-};
+        if (!value || !value.includes('T')) return 'N/A';
+        const [date, time] = value.split('T');
+        const formattedTime = time?.split('.')[0];
+        return `${date} ${formattedTime}`;
+    };
 
     const transformUserData = (data: PaginationType): PaginationType => {
         return {
@@ -21,13 +22,24 @@ const Page = () => {
             data: data.data.map((item) => ({
                 ...item,
                 isSent: item.isSent == 'True' ? 'Yes' : item.isSent == 'False' ? 'isSent' : 'No',
-             //date format change   
-            sentDatetime: formatDateTime(item.sentDatetime),
-            roDate: formatDateTime(item.roDate),
-            receivedDatetime: formatDateTime(item.receivedDatetime)
+                //date format change
+                sentDatetime: formatDateTime(item.sentDatetime),
+                roDate: formatDateTime(item.roDate),
+                receivedDatetime: formatDateTime(item.receivedDatetime)
             }))
         };
     };
+
+    const { exportTableToExcel } = useExcelExport();
+
+    const handleExportToExcel = async () => {
+        await exportTableToExcel({
+            tableId: 'basicTable',
+            fileName: 'Sent List Report',
+            sheetName: 'Sent List Report'
+        });
+    };
+
     return (
         <div className="col-12 xl:col-12">
             <div className="card">
@@ -75,7 +87,7 @@ const Page = () => {
                                     <button type="submit" className="p-button p-component p-button-primary">
                                         Filter
                                     </button>
-                                    <button type="button" className="p-button p-component p-button-secondary">
+                                    <button type="button" className="p-button p-component p-button-secondary" onClick={handleExportToExcel}>
                                         Export to Excel
                                     </button>
                                 </div>
