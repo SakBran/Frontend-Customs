@@ -41,7 +41,6 @@ const Page = () => {
 
     return (
         <div className="col-12 xl:col-12">
-            <h2>Test</h2>
             <div className="card">
                 <div className="row">
                     <div className="col-12">
