@@ -98,7 +98,7 @@ export const BasicTable: React.FC<PropsType> = ({
     return (
         <>
             <div className="table-container">
-                <table>
+                <table id="basicTable">
                     <thead>
                         <tr>
                             <td>No</td>
