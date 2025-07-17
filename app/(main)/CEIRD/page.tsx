@@ -12,7 +12,7 @@ const Page = () => {
             ...data,
             data: data.data.map((item) => ({
                 ...item,
-                isSent: item.isSent == 'True' ? 'Yes' : item.isSent == 'False' ? 'isSent' : 'No'
+                isSent: item.isSent === true ? 'Yes' : item.isSent === false ? 'No' : 'No'
             }))
         };
     };
