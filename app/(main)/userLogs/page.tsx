@@ -11,12 +11,20 @@ type Props = {
     id: string;
 };
 
+const formatDateTime = (value: string) => {
+    if (!value || !value.includes('T')) return 'N/A'; 
+    const [date, time] = value.split('T');
+    const formattedTime = time?.split('.')[0]; 
+    return `${date} ${formattedTime}`;
+};
+
 const transformUserData = (data: PaginationType): PaginationType => {
     return {
         ...data,
         data: data.data.map((item) => ({
             ...item,
-            isActive: item.isActive == '0' ? 'Active' : item.isActive == '1' ? 'InActive' : 'N/A'
+            isActive: item.isActive == '0' ? 'Active' : item.isActive == '1' ? 'InActive' : 'N/A',
+            logDatetime: formatDateTime(item.logDatetime)
         }))
     };
 };

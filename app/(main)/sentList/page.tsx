@@ -7,12 +7,24 @@ import React from 'react';
 
 const Page = () => {
     const { queryString, generateQueryString } = useQueryString();
+
+    const formatDateTime = (value: string) => {
+    if (!value || !value.includes('T')) return 'N/A'; 
+    const [date, time] = value.split('T');
+    const formattedTime = time?.split('.')[0]; 
+    return `${date} ${formattedTime}`;
+};
+
     const transformUserData = (data: PaginationType): PaginationType => {
         return {
             ...data,
             data: data.data.map((item) => ({
                 ...item,
-                isSent: item.isSent == 'True' ? 'Yes' : item.isSent == 'False' ? 'isSent' : 'No'
+                isSent: item.isSent == 'True' ? 'Yes' : item.isSent == 'False' ? 'isSent' : 'No',
+             //date format change   
+            sentDatetime: formatDateTime(item.sentDatetime),
+            roDate: formatDateTime(item.roDate),
+            receivedDatetime: formatDateTime(item.receivedDatetime)
             }))
         };
     };
