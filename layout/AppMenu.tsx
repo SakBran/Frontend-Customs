@@ -41,7 +41,7 @@ const AppMenu = () => {
         {
             label: 'Report',
             items: [
-                { label: 'Report 1', icon: 'pi pi-fw pi-chart-bar', to: '/1' },
+                { label: 'PaymentReport', icon: 'pi pi-fw pi-chart-bar', to: '/successfulPaymentReport' },
                 { label: 'Report 2', icon: 'pi pi-fw pi-chart-bar', to: '/2' },
                 { label: 'Report 3', icon: 'pi pi-fw pi-chart-bar', to: '/3' }
             ]
