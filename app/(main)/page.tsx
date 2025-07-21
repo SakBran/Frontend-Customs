@@ -73,6 +73,13 @@ const Dashboard = () => {
         });
     };
 
+    const formatDateTime = (value?: string | null) => {
+    if (!value || !value.includes('T')) return ' ';
+    const [date, time] = value.split('T');
+    const formattedTime = time?.split('.')[0]; 
+    return `${date} ${formattedTime}`;
+};
+
     return (
         <div className="grid">
             <div className="col-12 lg:col-6 xl:col-3">
@@ -142,7 +149,8 @@ const Dashboard = () => {
                     <DataTable value={data?.sentList} rows={5} paginator responsiveLayout="scroll">
                         <Column field="ceirid" header="CEIR ID" sortable style={{ width: '35%' }} />
                         {/* <Column field="sentDatetime" header="Sent Datetime" sortable style={{ width: '35%' }} body={(data) => formatCurrency(data.price)} /> */}
-                        <Column field="sentDatetime" header="Sent Datetime" sortable style={{ width: '35%' }} />
+                        <Column field="sentDatetime" header="Sent Datetime" sortable style={{ width: '35%' }} body={(rowData) => formatDateTime(rowData.sentDatetime)}
+                        />
                     </DataTable>
                 </div>
             </div>
