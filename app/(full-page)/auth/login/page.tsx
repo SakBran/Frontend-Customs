@@ -31,7 +31,7 @@ const LoginPage = () => {
                 title: 'Logging in...',
                 allowOutsideClick: false,
                 didOpen: () => {
-                    Swal.showLoading();
+                    Swal.showLoading(null);
                 }
             });
 
