@@ -13,11 +13,12 @@ type Props = {
 
 const ResendAction = ({ id }: Props) => {
     return (
-        <td>
-            <Link href={'edit/' + id} style={{ cursor: 'pointer' }}>
-                Resend
-            </Link>
-        </td>
+        <></>
+        // <td>
+        //     <Link href={'edit/' + id} style={{ cursor: 'pointer' }}>
+        //         Resend
+        //     </Link>
+        // </td>
     );
 };
 
